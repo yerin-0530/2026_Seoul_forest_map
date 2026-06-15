@@ -166,7 +166,7 @@ https://yerin-0530.github.io/2026_seoul_forest_map/seoul_forest_map.html
 
 ### Version 2
 
-(Insert Version 2 URL)
+https://yerin-0530.github.io/2026_Seoul_forest_map/Version_2/seoul_forest_map_v2.html
 
 ---
 
@@ -182,7 +182,7 @@ https://github.com/yerin-0530/2026_seoul_forest_map/blob/main/seoul_forest_desig
 
 ### Version 2 Notebook
 
-(Insert Version 2 Notebook URL)
+https://nbviewer.org/github/yerin-0530/2026_Seoul_forest_map/blob/main/Version_2/seoul_forest_design_code_v2.ipynb
 
 ---
 
