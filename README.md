@@ -1,109 +1,193 @@
-# 서울시 토지이용 및 도시숲 분포 분석 (Version 2)
+# Seoul Land Use & Urban Forest Analysis
 
-## 프로젝트 개요
+## Project Overview
 
-본 프로젝트는 OpenStreetMap(OSM) 기반 공간데이터를 활용하여 서울시의 토지이용 현황과 도시숲 분포를 시각화하고, 도시숲의 공간적 영향 범위를 분석하기 위한 인터랙티브 웹지도를 구축한 프로젝트이다.
+This project visualizes land-use patterns and urban forest distribution in Seoul using OpenStreetMap (OSM) data and Python-based GIS analysis tools.
 
-Version 2에서는 기존 도시숲 분석에 더해 상업지역 및 산업지역의 영향권(Buffer)을 추가하여 도시숲과 다른 토지이용 유형의 공간적 분포를 비교·분석할 수 있도록 개선하였다.
-
----
-
-## 주요 기능
-
-- 서울시 토지이용 분포 시각화
-  - 주거지역
-  - 상업지역
-  - 산업지역
-  - 도시숲
-
-- 도시숲 500m 버퍼 생성
-
-- 상업지역 버퍼 분석
-
-- 산업지역 버퍼 분석
-
-- Layer Control
-
-- 거리 측정 (Measure Control)
-
-- 좌표 확인 (Mouse Position)
-
-- MiniMap
-
-- Fullscreen
-
-- 사용자 정의 범례(Custom Legend)
+The main objective is to analyze the spatial relationship between urban forests and major land-use types and to evaluate urban forest accessibility through buffer analysis. OpenStreetMap land-use data were collected and processed using GeoPandas, and the final results were implemented as an interactive web map using Folium.
 
 ---
 
-## 사용 기술
+## Objectives
 
-- Python
-- GeoPandas
-- Shapely
-- OSMnx
-- Folium
-- OpenStreetMap
-- Google Colab
-- GitHub Pages
+- Visualize Seoul land-use distribution
+- Identify urban forest locations
+- Analyze urban forest accessibility using buffer analysis
+- Compare spatial relationships between forests and surrounding land-use types
+- Build an interactive Web GIS without commercial GIS software
 
 ---
 
-## 프로젝트 결과물
+## Data Source
 
-### GitHub 코드 원본
+### OpenStreetMap (OSM)
 
-https://github.com/yerin-0530/2026_Seoul_forest_map/blob/main/Version_2/seoul_forest_design_code_v2.ipynb
+The project uses OpenStreetMap land-use data collected through OSMnx.
 
-### Notebook 보기 전용
-
-https://nbviewer.org/github/yerin-0530/2026_Seoul_forest_map/blob/main/Version_2/seoul_forest_design_code_v2.ipynb
-
-### 인터랙티브 웹지도
-
-https://yerin-0530.github.io/2026_Seoul_forest_map/Version_2/seoul_forest_map_v2.html
-
----
-
-## 분석 내용
-
-본 프로젝트는 OpenStreetMap의 Landuse 데이터를 활용하여 서울시의 토지이용 유형을 분류하였다.
-
-분석 대상
+Collected land-use categories:
 
 - Residential
 - Commercial
 - Industrial
 - Forest
 
-도시숲(Forest) 데이터에 대해 500m 버퍼를 생성하여 시민의 녹지 접근성을 시각화하였으며, 상업지역과 산업지역의 영향권을 함께 비교함으로써 서울시 공간구조의 특성을 보다 직관적으로 분석할 수 있도록 하였다.
+OpenStreetMap was selected because several external GeoJSON sources repeatedly returned 404 errors and could not provide stable access to up-to-date spatial data.
 
 ---
 
-## 주요 개선 사항 (Version 2)
+## Methodology
 
-Version 1은 도시숲의 분포와 접근성 분석에 초점을 두었다.
+### 1. Data Collection
 
-Version 2에서는 다음 내용을 추가하였다.
+Land-use data were downloaded from OpenStreetMap using OSMnx.
 
-- 상업지역 버퍼 추가
-- 산업지역 버퍼 추가
-- 도시숲 영향권과의 비교 분석
-- 범례 및 시각화 개선
-- 사용자 인터페이스 개선
+### 2. Data Preprocessing
 
-이를 통해 도시숲의 공간적 분포를 다른 토지이용 유형과 함께 비교할 수 있는 분석 기반을 구축하였다.
+The collected spatial data were processed using GeoPandas.
+
+Main preprocessing steps included:
+
+- Land-use filtering
+- MultiPolygon handling
+- Coordinate Reference System (CRS) transformation
+- GeoDataFrame integration
+
+The analysis focused on four major land-use categories:
+
+- Residential
+- Commercial
+- Industrial
+- Forest
+
+### 3. Buffer Analysis
+
+To evaluate accessibility and spatial influence, buffer analysis was performed.
+
+#### Urban Forest Buffer
+
+- Extract forest features
+- Generate a 500m buffer
+- Merge overlapping buffers
+- Create a citywide urban forest influence zone
+
+The 500m distance was selected because it is commonly used in urban planning as a walkable neighborhood distance, representing approximately 5–10 minutes of walking time.
+
+#### Additional Analysis (Version 2)
+
+Additional buffer analysis was performed for:
+
+- Commercial areas
+- Industrial areas
+
+This extension allows comparison between urban forest influence zones and other major land-use influence zones.
+
+### 4. Interactive Web GIS
+
+The final map was implemented using Folium.
+
+Implemented functions include:
+
+- Layer Control
+- MiniMap
+- Fullscreen Mode
+- Distance Measurement Tool
+- Mouse Coordinate Display
+- Custom Floating Legend
+- Interactive Tooltips
 
 ---
 
-## 프로젝트 의의
+## Project Results
 
-본 프로젝트는 공개 공간정보(OpenStreetMap)와 Python 기반 GIS 분석 도구를 활용하여 별도의 전문 GIS 소프트웨어 없이도 공간 분석과 웹지도 구축이 가능함을 보여준다.
+The analysis revealed that urban forests are not evenly distributed across Seoul and tend to be concentrated in specific areas.
 
-또한 도시숲의 공간적 분포와 녹지 접근성을 시각적으로 분석함으로써 도시계획, 녹지정책, 환경분석 및 생활권 서비스 연구에 활용 가능한 GIS 사례를 제시한다.
+The buffer visualization highlights areas with relatively high accessibility to urban forests and areas where access to green infrastructure may be limited.
+
+The project demonstrates how open spatial data and Python GIS tools can be used to perform urban environmental analysis and develop Web GIS applications without proprietary GIS software.
 
 ---
 
-## 라이선스
+## Version History
 
-본 프로젝트는 학습 및 연구 목적으로 제작되었다.
+### Version 1
+
+Features:
+
+- Urban forest distribution visualization
+- 500m urban forest buffer analysis
+- Interactive Web GIS implementation
+
+### Version 2
+
+Additional features:
+
+- Commercial area buffer analysis
+- Industrial area buffer analysis
+- Extended land-use accessibility comparison
+
+---
+
+## Technologies Used
+
+- Python
+- Google Colab
+- GeoPandas
+- Shapely
+- Folium
+- OSMnx
+- OpenStreetMap
+- GitHub Pages
+
+---
+
+## AI Assistance
+
+This project utilized generative AI tools for:
+
+- Python code development
+- GIS workflow exploration
+- Debugging
+- Documentation support
+
+Tools used:
+
+- OpenAI ChatGPT (GPT-5.5)
+- Google Gemini 2.5 Flash
+
+Final implementation, validation, interpretation, and documentation were completed by the author.
+
+---
+
+## Interactive Web Map
+
+### Version 1
+
+https://yerin-0530.github.io/2026_seoul_forest_map/seoul_forest_map.html
+
+### Version 2
+
+(Insert Version 2 URL)
+
+---
+
+## Source Code
+
+### GitHub Repository
+
+https://github.com/yerin-0530/2026_seoul_forest_map
+
+### Version 1 Notebook
+
+https://github.com/yerin-0530/2026_seoul_forest_map/blob/main/seoul_forest_design_code.ipynb
+
+### Version 2 Notebook
+
+(Insert Version 2 Notebook URL)
+
+---
+
+## Author
+
+Yerin
+
+2026 Seoul Land Use & Urban Forest Analysis Project
